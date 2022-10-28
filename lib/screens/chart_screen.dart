@@ -3,20 +3,9 @@ import 'package:personal_expenses/screens/consts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class SalesData {
-  String x;
-  double y;
+  String? x;
+  int y;
   SalesData(this.x, this.y);
-}
-
-dynamic getColumnData() {
-  List<SalesData> columnData = <SalesData>[
-    SalesData("سيارة", 200),
-    SalesData("انترنت", 600),
-    SalesData("ايجار", 500),
-    SalesData("كهرباء", 150),
-    SalesData("قرض", 300),
-  ];
-  return columnData;
 }
 
 // class chart2
@@ -34,6 +23,10 @@ class _MyWidgetState2 extends State<ChartScreen> {
   List historyList = [];
   late List<GDBData> _charData;
 
+  get index => null;
+
+  // get index => null;
+
   @override
   void initState() {
     salary = box.read('salary');
@@ -43,6 +36,15 @@ class _MyWidgetState2 extends State<ChartScreen> {
 
     _charData = getChatData();
     super.initState();
+  }
+
+  dynamic getColumnData() {
+    List<SalesData> columnData = <SalesData>[
+      SalesData('${historyList}', 20),
+      // SalesData((historyList[index]['title']), (historyList[index]['value'])),
+      // SalesData("ايجار", 500),
+    ];
+    return columnData;
   }
 
   @override
@@ -69,8 +71,7 @@ class _MyWidgetState2 extends State<ChartScreen> {
                     ),
                     child: SfCircularChart(
                         title: ChartTitle(
-                            text: "إجمالي الصرف",
-                            alignment: ChartAlignment.center),
+                            text: ":الاجمالي", alignment: ChartAlignment.far),
                         palette: const <Color>[
                           Color.fromRGBO(192, 187, 255, 1),
                           Color.fromRGBO(155, 166, 250, 1),
@@ -112,8 +113,7 @@ class _MyWidgetState2 extends State<ChartScreen> {
                         Color.fromRGBO(155, 166, 250, 1),
                       ],
                       title: ChartTitle(
-                          text: "أكثر بنود صرفا",
-                          alignment: ChartAlignment.center),
+                          text: ":الاكثر صرف", alignment: ChartAlignment.far),
                       primaryXAxis: CategoryAxis(),
                       primaryYAxis: NumericAxis(),
                       series: <ChartSeries>[
