@@ -18,7 +18,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     {'title': 'Home', 'screen': HomeScreen()},
     {'title': 'Chart', 'screen': ChartScreen()},
     {'title': 'History', 'screen': HistoryScreen()},
-    {'title': 'Settings', 'screen': SettingsScreen()},
+    {'title': 'Settings', 'screen': SettingScreen()},
   ];
 
   void _selectedPage(index) {
