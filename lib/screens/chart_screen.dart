@@ -3,7 +3,7 @@ import 'package:personal_expenses/screens/consts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class SalesData {
-  String? x;
+  String x;
   int y;
   SalesData(this.x, this.y);
 }
@@ -40,7 +40,9 @@ class _MyWidgetState2 extends State<ChartScreen> {
 
   dynamic getColumnData() {
     List<SalesData> columnData = <SalesData>[
-      SalesData('${historyList}', 20),
+      for (int i = 0; i < historyList.length; i++)
+        SalesData("${historyList[i]['title']}", (historyList[i]['value']))
+
       // SalesData((historyList[index]['title']), (historyList[index]['value'])),
       // SalesData("ايجار", 500),
     ];
@@ -71,7 +73,9 @@ class _MyWidgetState2 extends State<ChartScreen> {
                     ),
                     child: SfCircularChart(
                         title: ChartTitle(
-                            text: ":الاجمالي", alignment: ChartAlignment.far),
+                          text: ":الاجمالي",
+                          alignment: ChartAlignment.far,
+                        ),
                         palette: const <Color>[
                           Color.fromRGBO(192, 187, 255, 1),
                           Color.fromRGBO(155, 166, 250, 1),
