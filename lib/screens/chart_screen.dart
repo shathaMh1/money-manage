@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:personal_expenses/screens/consts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -41,7 +42,7 @@ class _MyWidgetState2 extends State<ChartScreen> {
   dynamic getColumnData() {
     List<SalesData> columnData = <SalesData>[
       for (int i = 0; i < historyList.length; i++)
-        SalesData("${historyList[i]['title']}", (historyList[i]['value']))
+        SalesData("${historyList[i]['subtitle']}", (historyList[i]['value']))
 
       // SalesData((historyList[index]['title']), (historyList[index]['value'])),
       // SalesData("ايجار", 500),
@@ -64,18 +65,23 @@ class _MyWidgetState2 extends State<ChartScreen> {
                     width: 380,
                     decoration: BoxDecoration(
                       color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          blurRadius: 5,
+                          blurRadius: 2,
                           color: Colors.black.withOpacity(0.3),
                         ),
                       ],
                     ),
                     child: SfCircularChart(
                         title: ChartTitle(
-                          text: ":الاجمالي",
-                          alignment: ChartAlignment.far,
-                        ),
+                            text: ":الاجمالي",
+                            alignment: ChartAlignment.far,
+                            textStyle: TextStyle(
+                              fontFamily: 'SF Pro Display',
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            )),
                         palette: const <Color>[
                           Color.fromRGBO(192, 187, 255, 1),
                           Color.fromRGBO(155, 166, 250, 1),
@@ -103,11 +109,11 @@ class _MyWidgetState2 extends State<ChartScreen> {
                     // margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      // borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
                           // offset: Offset(1, 0),
-                          blurRadius: 7,
+                          blurRadius: 2,
                           color: Colors.black.withOpacity(0.3),
                         ),
                       ],
@@ -117,9 +123,27 @@ class _MyWidgetState2 extends State<ChartScreen> {
                         Color.fromRGBO(155, 166, 250, 1),
                       ],
                       title: ChartTitle(
-                          text: ":الاكثر صرف", alignment: ChartAlignment.far),
-                      primaryXAxis: CategoryAxis(),
-                      primaryYAxis: NumericAxis(),
+                          text: ":الاكثر صرف",
+                          alignment: ChartAlignment.far,
+                          textStyle: TextStyle(
+                            fontFamily: 'SF Pro Display',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          )),
+                      primaryXAxis: CategoryAxis(
+                          labelStyle: TextStyle(
+                              fontFamily: 'Archivo',
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black)),
+                      primaryYAxis: NumericAxis(
+                          crossesAt: 4,
+                          opposedPosition: true,
+                          labelStyle: TextStyle(
+                              fontFamily: 'Archivo',
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black)),
                       series: <ChartSeries>[
                         ColumnSeries<SalesData, String>(
                             dataSource: getColumnData(),
